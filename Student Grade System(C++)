@@ -1,0 +1,67 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+struct nilaiSTD {
+    double CLO1, CLO2, CLO3, CLO4;
+    double nilaiAkhir;
+    string indeks;
+};
+
+
+double hitungNilaiAkhir(double c1, double c2, double c3, double c4) {
+
+    return (c1 * 0.25) + (c2 * 0.25) + (c3 * 0.25) + (c4 * 0.25);
+}
+
+
+string tentukanIndeks(double nilaiAkhir) {
+    if (nilaiAkhir >= 85) return "A";
+    else if (nilaiAkhir >= 75) return "AB";
+    else if (nilaiAkhir >= 65) return "B";
+    else if (nilaiAkhir >= 60) return "BC";
+    else if (nilaiAkhir >= 55) return "C";
+    else if (nilaiAkhir >= 40) return "D";
+    else return "E";
+}
+
+int main() {
+
+    const int JML_MAHASISWA = 3;
+    nilaiSTD mhs[JML_MAHASISWA];
+
+    cout << "--- STUDENT GRADE SYSTEM ---\n\n";
+
+
+    for (int i = 0; i < JML_MAHASISWA; i++) {
+        cout << "Mahasiswa " << i + 1 << endl;
+        cout << "CLO 1 : ";
+        cin >> mhs[i].CLO1;
+        cout << "CLO 2 : ";
+        cin >> mhs[i].CLO2;
+        cout << "CLO 3 : ";
+        cin >> mhs[i].CLO3;
+        cout << "CLO 4 : ";
+        cin >> mhs[i].CLO4;
+        cout << endl;
+
+
+        mhs[i].nilaiAkhir = hitungNilaiAkhir(mhs[i].CLO1, mhs[i].CLO2, mhs[i].CLO3, mhs[i].CLO4);
+
+
+        mhs[i].indeks = tentukanIndeks(mhs[i].nilaiAkhir);
+    }
+
+    cout << "--- HASIL ---\n";
+
+
+    for (int i = 0; i < JML_MAHASISWA; i++) {
+        cout << "Mahasiswa " << i + 1 << endl;
+        cout << "Nilai Akhir: " << mhs[i].nilaiAkhir << endl;
+        cout << "Indeks: " << mhs[i].indeks << endl << endl;
+    }
+
+    return 0;
+}
