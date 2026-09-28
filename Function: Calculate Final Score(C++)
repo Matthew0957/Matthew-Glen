@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+struct nilaiSTD {
+    double clo1;
+    double clo2;
+    double clo3;
+    double clo4;
+    double nilaiAkhir;
+    string indeks;
+};
+
+
+double hitungNilaiAkhir(double c1, double c2, double c3, double c4) {
+    double hasil;
+    hasil = (0.30 * c1) + (0.30 * c2) + (0.20 * c3) + (0.20 * c4);
+    return hasil;
+}
+
+int main() {
+    nilaiSTD mahasiswa;
+
+
+    cout << "Masukkan nilai CLO-1: ";
+    cin >> mahasiswa.clo1;
+
+    cout << "Masukkan nilai CLO-2: ";
+    cin >> mahasiswa.clo2;
+
+    cout << "Masukkan nilai CLO-3: ";
+    cin >> mahasiswa.clo3;
+
+    cout << "Masukkan nilai CLO-4: ";
+    cin >> mahasiswa.clo4;
+
+
+    mahasiswa.nilaiAkhir = hitungNilaiAkhir(mahasiswa.clo1, mahasiswa.clo2, mahasiswa.clo3, mahasiswa.clo4);
+
+
+    cout << "\n--- HASIL ---" << endl;
+    cout << "Nilai Akhir: " << mahasiswa.nilaiAkhir << endl;
+
+
+    cout << "\nTekan Enter untuk keluar...";
+    cin.ignore();
+    cin.get();
+
+    return 0;
+}
