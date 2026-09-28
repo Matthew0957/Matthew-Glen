@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct nilaiSTD {
+    double clo1;
+    double clo2;
+    double clo3;
+    double clo4;
+    double nilaiAkhir;
+    string indeks;
+};
+int main() {
+    nilaiSTD mahasiswa;
+    cout << "Masukkan nilai CLO-1: ";
+    cin >> mahasiswa.clo1;
+    cout << "Masukkan nilai CLO-2: ";
+    cin >> mahasiswa.clo2;
+
+    cout << "Masukkan nilai CLO-3: ";
+    cin >> mahasiswa.clo3;
+
+    cout << "Masukkan nilai CLO-4: ";
+    cin >> mahasiswa.clo4;
+
+    return 0;
+}
