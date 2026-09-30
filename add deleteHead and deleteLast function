@@ -1,0 +1,44 @@
+void deletehead() {
+        if (head == nullptr) {
+            cout << "[-] Linked List kosong!" << endl;
+            return;
+        }
+
+        Node* hapus = head;
+
+        cout << "[-] " << hapus->data.nama
+             << " berhasil dihapus dari DEPAN." << endl;
+
+        head = head->next;
+        delete hapus;
+    }
+
+    void deleteLast() {
+        if (head == nullptr) {
+            cout << "[-] Linked List kosong!" << endl;
+            return;
+        }
+
+        if (head->next == nullptr) {
+            cout << "[-] " << head->data.nama
+                 << " berhasil dihapus dari BELAKANG." << endl;
+
+            delete head;
+            head = nullptr;
+            return;
+        }
+
+        Node* bantu = head;
+
+        while (bantu->next->next != nullptr) {
+            bantu = bantu->next;
+        }
+
+        Node* hapus = bantu->next;
+
+        cout << "[-] " << hapus->data.nama
+             << " berhasil dihapus dari BELAKANG." << endl;
+
+        bantu->next = nullptr;
+        delete hapus;
+    }
