@@ -1,0 +1,41 @@
+class LinkedList {
+private:
+    Node* head;
+
+public:
+    LinkedList() {
+        head = nullptr;
+    }
+
+    void insertLast(Mahasiswa mhs) {
+        Node* baru = new Node;
+        baru->data = mhs;
+        baru->next = nullptr;
+
+        if (head == nullptr) {
+            head = baru;
+        } else {
+            Node* bantu = head;
+
+            while (bantu->next != nullptr) {
+                bantu = bantu->next;
+            }
+
+            bantu->next = baru;
+        }
+
+        cout << "[+] " << mhs.nama
+             << " (NIM: " << mhs.nim
+             << ") ditambahkan di BELAKANG (Last)." << endl;
+    }
+
+    void inserthead(Mahasiswa mhs) {
+        Node* baru = new Node;
+        baru->data = mhs;
+        baru->next = head;
+
+        head = baru;
+
+        cout << "[+] " << mhs.nama
+             << " (NIM: " << mhs.nim
+             << ") ditambahkan di DEPAN (First)." << endl;
