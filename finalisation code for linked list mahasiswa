@@ -1,0 +1,319 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+struct Mahasiswa {
+    string nim;
+    string nama;
+    int kehadiran;
+};
+
+struct Node {
+    Mahasiswa data;
+    Node* next;
+};
+
+class LinkedList {
+private:
+    Node* head;
+
+public:
+    LinkedList() {
+        head = nullptr;
+    }
+
+    void insertLast(Mahasiswa mhs) {
+        Node* baru = new Node;
+        baru->data = mhs;
+        baru->next = nullptr;
+
+        if (head == nullptr) {
+            head = baru;
+        } else {
+            Node* bantu = head;
+
+            while (bantu->next != nullptr) {
+                bantu = bantu->next;
+            }
+
+            bantu->next = baru;
+        }
+
+        cout << "[+] " << mhs.nama
+             << " (NIM: " << mhs.nim
+             << ") ditambahkan di BELAKANG (Last)." << endl;
+    }
+
+    void inserthead(Mahasiswa mhs) {
+        Node* baru = new Node;
+        baru->data = mhs;
+        baru->next = head;
+
+        head = baru;
+
+        cout << "[+] " << mhs.nama
+             << " (NIM: " << mhs.nim
+             << ") ditambahkan di DEPAN (First)." << endl;
+    }
+
+    void deletehead() {
+        if (head == nullptr) {
+            cout << "[-] Linked List kosong!" << endl;
+            return;
+        }
+
+        Node* hapus = head;
+
+        cout << "[-] " << hapus->data.nama
+             << " berhasil dihapus dari DEPAN." << endl;
+
+        head = head->next;
+        delete hapus;
+    }
+
+    void deleteLast() {
+        if (head == nullptr) {
+            cout << "[-] Linked List kosong!" << endl;
+            return;
+        }
+
+        if (head->next == nullptr) {
+            cout << "[-] " << head->data.nama
+                 << " berhasil dihapus dari BELAKANG." << endl;
+
+            delete head;
+            head = nullptr;
+            return;
+        }
+
+        Node* bantu = head;
+
+        while (bantu->next->next != nullptr) {
+            bantu = bantu->next;
+        }
+
+        Node* hapus = bantu->next;
+
+        cout << "[-] " << hapus->data.nama
+             << " berhasil dihapus dari BELAKANG." << endl;
+
+        bantu->next = nullptr;
+        delete hapus;
+    }
+
+    void display() {
+        if (head == nullptr) {
+            cout << "\nLinked List kosong!\n";
+            return;
+        }
+
+        cout << "\n";
+        cout << "=============================================================="
+             << endl;
+        cout << "           DAFTAR KEHADIRAN MAHASISWA (LINKED LIST)"
+             << endl;
+        cout << "=============================================================="
+             << endl;
+
+        cout << left
+             << setw(5) << "No"
+             << setw(17) << "NIM"
+             << setw(32) << "Nama Mahasiswa"
+             << setw(12) << "Kehadiran"
+             << endl;
+
+        cout << "--------------------------------------------------------------"
+             << endl;
+
+        Node* bantu = head;
+        int no = 1;
+
+        while (bantu != nullptr) {
+            cout << left
+                 << setw(5) << no
+                 << setw(17) << bantu->data.nim
+                 << setw(32) << bantu->data.nama
+                 << setw(12)
+                 << (to_string(bantu->data.kehadiran) + "%")
+                 << endl;
+
+            bantu = bantu->next;
+            no++;
+        }
+
+        cout << "=============================================================="
+             << endl;
+    }
+
+    void search(string nim) {
+        Node* bantu = head;
+
+        while (bantu != nullptr) {
+            if (bantu->data.nim == nim) {
+                cout << "\nData ditemukan!" << endl;
+                cout << "NIM       : " << bantu->data.nim << endl;
+                cout << "Nama      : " << bantu->data.nama << endl;
+                cout << "Kehadiran : " << bantu->data.kehadiran << "%" << endl;
+                return;
+            }
+
+            bantu = bantu->next;
+        }
+
+        cout << "\nData dengan NIM " << nim
+             << " tidak ditemukan." << endl;
+    }
+
+    int count() {
+        int jumlah = 0;
+        Node* bantu = head;
+
+        while (bantu != nullptr) {
+            jumlah++;
+            bantu = bantu->next;
+        }
+
+        return jumlah;
+    }
+
+    ~LinkedList() {
+        Node* bantu;
+
+        while (head != nullptr) {
+            bantu = head;
+            head = head->next;
+            delete bantu;
+        }
+    }
+};
+
+int main() {
+
+    LinkedList daftar;
+
+    Mahasiswa data[] = {
+        {"103032500025", "MUHAMMAD FADHIL ASYAM DAM", 100},
+        {"103032500041", "RASHYA IMAN DEHAVILLAND", 100},
+        {"103032500144", "MUHAMMAD FARIZ MUHTADI", 100},
+        {"103032500146", "MAHESA PUTRA MULYAWAN", 100},
+        {"103032500149", "GYTO RANGGA SATRIA PUTRA", 100},
+        {"103032500150", "MAUFAL NAFIZ FATHURRAHMAN", 100},
+        {"103032500153", "FAZLI BAKTIADI", 100},
+        {"103032500154", "MATTHEW GLEN ABRAHAM PAKPAH", 100},
+        {"103032500176", "VENDRA FAUSTA ANDREAN", 100},
+        {"103032500188", "DZAKY ALLAM SHIDIQ", 100},
+        {"103032500191", "NAYLA NOVTIERA ANJANI", 67},
+        {"103032540001", "FATHIR ARIS NURHAYANI", 100},
+        {"103032540002", "IDA BAGUS HARELL", 100},
+        {"103032540003", "NIGEL WILLIAM PIETERS", 100},
+        {"103032540004", "AQILA FATHATULAYYA", 100},
+        {"103032540005", "BADRIAN NURAINI RAHAYU", 100}
+    };
+
+    for (int i = 0; i < 16; i++) {
+        daftar.insertLast(data[i]);
+    }
+
+    daftar.display();
+
+    int pilihan;
+
+    do {
+        cout << "\n";
+        cout << "===============================" << endl;
+        cout << "         MENU LINKED LIST      " << endl;
+        cout << "===============================" << endl;
+        cout << "1. Tambah Data di Depan" << endl;
+        cout << "2. Tambah Data di Belakang" << endl;
+        cout << "3. Hapus Data di Depan" << endl;
+        cout << "4. Hapus Data di Belakang" << endl;
+        cout << "5. Tampilkan Data" << endl;
+        cout << "6. Cari Mahasiswa" << endl;
+        cout << "7. Jumlah Data" << endl;
+        cout << "0. Keluar" << endl;
+        cout << "===============================" << endl;
+
+        cout << "Pilih menu : ";
+        cin >> pilihan;
+
+        switch (pilihan) {
+
+            case 1: {
+                Mahasiswa mhs;
+
+                cout << "\nMasukkan NIM       : ";
+                cin >> mhs.nim;
+
+                cin.ignore();
+
+                cout << "Masukkan Nama      : ";
+                getline(cin, mhs.nama);
+
+                cout << "Masukkan Kehadiran : ";
+                cin >> mhs.kehadiran;
+
+                daftar.inserthead(mhs);
+
+                break;
+            }
+
+            case 2: {
+                Mahasiswa mhs;
+
+                cout << "\nMasukkan NIM       : ";
+                cin >> mhs.nim;
+
+                cin.ignore();
+
+                cout << "Masukkan Nama      : ";
+                getline(cin, mhs.nama);
+
+                cout << "Masukkan Kehadiran : ";
+                cin >> mhs.kehadiran;
+
+                daftar.insertLast(mhs);
+
+                break;
+            }
+
+            case 3:
+                daftar.deletehead();
+                break;
+
+            case 4:
+                daftar.deleteLast();
+                break;
+
+            case 5:
+                daftar.display();
+                break;
+
+            case 6: {
+                string nim;
+
+                cout << "\nMasukkan NIM yang dicari : ";
+                cin >> nim;
+
+                daftar.search(nim);
+
+                break;
+            }
+
+            case 7:
+                cout << "\nJumlah mahasiswa : "
+                     << daftar.count() << endl;
+                break;
+
+            case 0:
+                cout << "\nProgram selesai." << endl;
+                break;
+
+            default:
+                cout << "\nPilihan tidak tersedia!" << endl;
+        }
+
+    } while (pilihan != 0);
+
+    return 0;
+}
