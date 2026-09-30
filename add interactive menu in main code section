@@ -1,0 +1,102 @@
+daftar.display();
+
+    int pilihan;
+
+    do {
+        cout << "\n";
+        cout << "===============================" << endl;
+        cout << "         MENU LINKED LIST      " << endl;
+        cout << "===============================" << endl;
+        cout << "1. Tambah Data di Depan" << endl;
+        cout << "2. Tambah Data di Belakang" << endl;
+        cout << "3. Hapus Data di Depan" << endl;
+        cout << "4. Hapus Data di Belakang" << endl;
+        cout << "5. Tampilkan Data" << endl;
+        cout << "6. Cari Mahasiswa" << endl;
+        cout << "7. Jumlah Data" << endl;
+        cout << "0. Keluar" << endl;
+        cout << "===============================" << endl;
+
+        cout << "Pilih menu : ";
+        cin >> pilihan;
+
+        switch (pilihan) {
+
+            case 1: {
+                Mahasiswa mhs;
+
+                cout << "\nMasukkan NIM       : ";
+                cin >> mhs.nim;
+
+                cin.ignore();
+
+                cout << "Masukkan Nama      : ";
+                getline(cin, mhs.nama);
+
+                cout << "Masukkan Kehadiran : ";
+                cin >> mhs.kehadiran;
+
+                daftar.inserthead(mhs);
+
+                break;
+            }
+
+            case 2: {
+                Mahasiswa mhs;
+
+                cout << "\nMasukkan NIM       : ";
+                cin >> mhs.nim;
+
+                cin.ignore();
+
+                cout << "Masukkan Nama      : ";
+                getline(cin, mhs.nama);
+
+                cout << "Masukkan Kehadiran : ";
+                cin >> mhs.kehadiran;
+
+                daftar.insertLast(mhs);
+
+                break;
+            }
+
+            case 3:
+                daftar.deletehead();
+                break;
+
+            case 4:
+                daftar.deleteLast();
+                break;
+
+            case 5:
+                daftar.display();
+                break;
+
+            case 6: {
+                string nim;
+
+                cout << "\nMasukkan NIM yang dicari : ";
+                cin >> nim;
+
+                daftar.search(nim);
+
+                break;
+            }
+
+            case 7:
+                cout << "\nJumlah mahasiswa : "
+                     << daftar.count() << endl;
+                break;
+
+            case 0:
+                cout << "\nProgram selesai." << endl;
+                break;
+
+            default:
+                cout << "\nPilihan tidak tersedia!" << endl;
+        }
+
+    } while (pilihan != 0);
+
+    return 0;
+}
